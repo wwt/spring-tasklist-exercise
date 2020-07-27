@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -77,5 +78,37 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return !expired;
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authorities=" + authorities +
+                ", locked=" + locked +
+                ", expired=" + expired +
+                ", enabled=" + enabled +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppUser appUser = (AppUser) o;
+        return locked == appUser.locked &&
+                expired == appUser.expired &&
+                enabled == appUser.enabled &&
+                Objects.equals(id, appUser.id) &&
+                Objects.equals(username, appUser.username) &&
+                Objects.equals(password, appUser.password) &&
+                Objects.equals(authorities, appUser.authorities);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, authorities, locked, expired, enabled);
     }
 }

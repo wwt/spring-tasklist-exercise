@@ -3,7 +3,7 @@ package com.wwt.tasklist.task;
 import com.wwt.tasklist.user.AppUser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,8 +29,9 @@ public class TaskController {
 
     @PostMapping
     @Secured("ROLE_USER")
-    public ResponseEntity<Task> create(@RequestBody NewTaskRequest newTaskRequest, Authentication authentication) {
-        return taskService.save(newTaskRequest, authentication)
+    public ResponseEntity<Task> create(@RequestBody NewTaskRequest newTaskRequest,
+                                       @AuthenticationPrincipal AppUser appUser) {
+        return taskService.save(newTaskRequest, appUser)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.unprocessableEntity().build());
     }
