@@ -14,24 +14,25 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name="users")
-public class AppUser implements UserDetails {
+public class AuthenticatedUser implements UserDetails {
     @Id
     private UUID id;
     @NotEmpty
     private String username;
     @NotEmpty
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private List<Authority> authorities;
 
     private boolean locked;
     private boolean expired;
     private boolean enabled;
 
-    public AppUser() {
+    public AuthenticatedUser() {
     }
 
-    public AppUser(@NotEmpty String username, @NotEmpty String password, List<Authority> authorities) {
+    public AuthenticatedUser(@NotEmpty String username, @NotEmpty String password, List<Authority> authorities) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.password = password;
@@ -39,11 +40,8 @@ public class AppUser implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities.stream()
-                .map(Authority::getName)
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toSet());
+    public List<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     public void setAuthorities(List<Authority> authorities) {
@@ -97,14 +95,14 @@ public class AppUser implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AppUser appUser = (AppUser) o;
-        return locked == appUser.locked &&
-                expired == appUser.expired &&
-                enabled == appUser.enabled &&
-                Objects.equals(id, appUser.id) &&
-                Objects.equals(username, appUser.username) &&
-                Objects.equals(password, appUser.password) &&
-                Objects.equals(authorities, appUser.authorities);
+        AuthenticatedUser authenticatedUser = (AuthenticatedUser) o;
+        return locked == authenticatedUser.locked &&
+                expired == authenticatedUser.expired &&
+                enabled == authenticatedUser.enabled &&
+                Objects.equals(id, authenticatedUser.id) &&
+                Objects.equals(username, authenticatedUser.username) &&
+                Objects.equals(password, authenticatedUser.password) &&
+                Objects.equals(authorities, authenticatedUser.authorities);
     }
 
     @Override
