@@ -62,4 +62,13 @@ public class NewTaskRequest {
     public int hashCode() {
         return Objects.hash(title, description, due);
     }
+
+    @Override
+    public String toString() {
+        return "NewTaskRequest{" +
+            "title='" + title + '\'' +
+            ", description='" + description + '\'' +
+            ", due=" + due +
+            '}';
+    }
 }
