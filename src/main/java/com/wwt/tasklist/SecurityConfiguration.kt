@@ -1,10 +1,8 @@
 package com.wwt.tasklist
 
 import com.wwt.tasklist.user.JdbcUserDetailsService
-import org.springframework.boot.web.servlet.filter.OrderedFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.core.annotation.Order
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
@@ -32,6 +30,7 @@ class SecurityConfiguration(
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http
+            .csrf().disable()
             .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/tasks").permitAll()
                 .anyRequest().hasAnyRole("ADMIN", "USER")

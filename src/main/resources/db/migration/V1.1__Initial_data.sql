@@ -1,7 +1,7 @@
-insert into users(id, username, password) values ('658d1a8e-d02a-11ea-87d0-0242ac130003', 'admin', '{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
-insert into users(id, username, password)  values ('78f7cc04-d02a-11ea-87d0-0242ac130003', 'bob', '{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
-insert into users(id, username, password)  values ('80aa18da-d02a-11ea-87d0-0242ac130003', 'steve', '{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
-insert into users(id, username, password)  values ('85bb4b14-d02a-11ea-87d0-0242ac130003', 'nate', '{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
+insert into users(id, username, password) values ('658d1a8e-d02a-11ea-87d0-0242ac130003', 'admin', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
+insert into users(id, username, password)  values ('78f7cc04-d02a-11ea-87d0-0242ac130003', 'bob', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
+insert into users(id, username, password)  values ('80aa18da-d02a-11ea-87d0-0242ac130003', 'steve', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
+insert into users(id, username, password)  values ('85bb4b14-d02a-11ea-87d0-0242ac130003', 'nate', '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
 
 insert into authorities(user_id, authority) values('658d1a8e-d02a-11ea-87d0-0242ac130003', 'ROLE_ADMIN');
 insert into authorities(user_id, authority) values('658d1a8e-d02a-11ea-87d0-0242ac130003', 'ROLE_USER');
