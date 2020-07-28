@@ -10,11 +10,10 @@ import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 import static org.hamcrest.Matchers.not;
 import static org.mockito.ArgumentMatchers.contains;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -32,7 +31,6 @@ class TaskControllerTest {
     @WithAnonymousUser
     void shouldReturnAllTasksWhenNotAuthenticated() throws Exception {
         mockMvc.perform(get("/tasks"))
-            .andDo(print())
             .andExpect(status().isOk())
             .andExpect(content().json("[\n" +
                 "  {\n" +
@@ -79,10 +77,10 @@ class TaskControllerTest {
     @Test
     @WithUserDetails("bob") // see sql files for user definitions
     void shouldBeAbleToCreateTaskAsAuthenticatedUser() throws Exception {
-        NewTaskRequest todo = new NewTaskRequest("Work work!", "I need to do this task too!", null);
+        LocalDateTime now = LocalDateTime.now();
+        NewTaskRequest todo = new NewTaskRequest("Work work!", "I need to do this task too!", now);
 
         mockMvc.perform(post("/tasks")
-            .with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(todo)))
             .andDo(print())
@@ -92,6 +90,7 @@ class TaskControllerTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").isArray())
             .andExpect(jsonPath("$[1].title").value("Work work!"))
-            .andExpect(jsonPath("$[1].description").value("I need to do this task too!"));
+            .andExpect(jsonPath("$[1].description").value("I need to do this task too!"))
+            .andExpect(jsonPath("$[1].due").value(now.toString()));
     }
 }
