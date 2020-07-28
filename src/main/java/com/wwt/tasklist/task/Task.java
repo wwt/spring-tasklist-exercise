@@ -1,6 +1,10 @@
 package com.wwt.tasklist.task;
 
-import com.wwt.tasklist.user.AppUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.wwt.tasklist.user.AuthenticatedUser;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -10,6 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tasks")
+@EntityListeners(AuditingEntityListener.class)
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,12 +25,31 @@ public class Task {
     private String description;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private AppUser user;
+    @JsonIgnore
+    private AuthenticatedUser user;
+    @CreatedDate
+    private LocalDateTime createdTime;
 
     private LocalDateTime due;
 
+    public Task() {
+    }
+
+    public Task(UUID id, @NotEmpty String title, @NotEmpty String description, AuthenticatedUser user, LocalDateTime due) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.user = user;
+        this.due = due;
+    }
+
     public UUID getId() {
         return id;
+    }
+
+    @JsonProperty("user")
+    public String getUsername() {
+        return user.getUsername();
     }
 
     public void setId(UUID id) {
@@ -56,12 +80,12 @@ public class Task {
         this.due = due;
     }
 
-    public AppUser getUser() {
+    public AuthenticatedUser getUser() {
         return user;
     }
 
-    public void setUser(AppUser appUser) {
-        this.user = appUser;
+    public void setUser(AuthenticatedUser authenticatedUser) {
+        this.user = authenticatedUser;
     }
 
     @Override
