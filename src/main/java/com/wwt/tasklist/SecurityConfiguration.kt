@@ -33,7 +33,7 @@ class SecurityConfiguration(
             .csrf().disable()
             .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/tasks").permitAll()
-                .anyRequest().hasAnyRole("ADMIN", "USER")
+                .anyRequest().authenticated()
             .and()
                 .httpBasic()
     }

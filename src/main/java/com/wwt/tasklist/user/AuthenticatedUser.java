@@ -1,16 +1,13 @@
 package com.wwt.tasklist.user;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name="users")
@@ -28,16 +25,6 @@ public class AuthenticatedUser implements UserDetails {
     private boolean locked;
     private boolean expired;
     private boolean enabled;
-
-    public AuthenticatedUser() {
-    }
-
-    public AuthenticatedUser(@NotEmpty String username, @NotEmpty String password, List<Authority> authorities) {
-        this.id = UUID.randomUUID();
-        this.username = username;
-        this.password = password;
-        this.authorities = authorities;
-    }
 
     @Override
     public List<? extends GrantedAuthority> getAuthorities() {

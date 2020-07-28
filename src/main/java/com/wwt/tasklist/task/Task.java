@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wwt.tasklist.user.AuthenticatedUser;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -29,7 +30,7 @@ public class Task {
     private AuthenticatedUser user;
     @CreatedDate
     private LocalDateTime createdTime;
-
+    @Nullable
     private LocalDateTime due;
 
     public Task() {
@@ -72,11 +73,12 @@ public class Task {
         this.description = description;
     }
 
+    @Nullable
     public LocalDateTime getDue() {
         return due;
     }
 
-    public void setDue(LocalDateTime due) {
+    public void setDue(@Nullable LocalDateTime due) {
         this.due = due;
     }
 

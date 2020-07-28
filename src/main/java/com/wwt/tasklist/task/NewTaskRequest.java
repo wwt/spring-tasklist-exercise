@@ -1,5 +1,7 @@
 package com.wwt.tasklist.task;
 
+import org.springframework.lang.Nullable;
+
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -9,6 +11,7 @@ public class NewTaskRequest {
     private String title;
     @NotEmpty
     private String description;
+    @Nullable
     private LocalDateTime due;
 
     public NewTaskRequest() {
@@ -36,11 +39,12 @@ public class NewTaskRequest {
         this.description = description;
     }
 
+    @Nullable
     public LocalDateTime getDue() {
         return due;
     }
 
-    public void setDue(LocalDateTime due) {
+    public void setDue(@Nullable LocalDateTime due) {
         this.due = due;
     }
 
