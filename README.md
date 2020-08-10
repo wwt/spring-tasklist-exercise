@@ -41,4 +41,5 @@ As a task list user, I want to be able to search for a task by its title, so I c
 - You are not limited to frameworks and technologies present in the application -- if you want to include additional libraries, go for it!
 - Kotlin is available on the classpath. If you are a fan of Kotlin, you are encouraged to convert / use Kotlin to your heart's content.
 - We love TDD! It is not required to write tests for the new functionality, but very much appreciated.
-- Check out the sql files in the project -- this is how users get created, and how the initial dataset is populated.
+- Check out the sql files in the project -- this is how users get created, and how the initial dataset is populated. 
+- Note that the database is in-memory right now, on restart all data will be lost. This is fine for the purposes of this exercise. 
