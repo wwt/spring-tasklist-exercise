@@ -35,7 +35,7 @@ As a task list user, I want to be able to search for a task by its title, so I c
  - [ ] The search endpoint has no special behavior for admin users, it should only return relevant tasks for the user performing the search.
  - [ ] Tasks should be sorted by their due dates, soonest first. Null due dates should sort to end of list.
  
-#### Notes
+#### Notes:
 - Check out the sql files in the project -- this is how users get created, and how the initial dataset gets populated. 
 - Note that the database is in-memory right now; upon restart all data will be lost. If you need additional data, feel free to make some up or modify the existing entries.
 - Kotlin is available on the classpath. If you are a fan of Kotlin, you are encouraged to use Kotlin to your heart's content.
