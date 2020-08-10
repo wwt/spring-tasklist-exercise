@@ -35,11 +35,14 @@ As a task list user, I want to be able to search for a task by its title, so I c
  - [ ] The search endpoint has no special behavior for admin users, it should only return relevant tasks for the user performing the search.
  - [ ] Tasks should be sorted by their due dates, soonest first. Null due dates should sort to end of list.
  
-*Notes/Tips:* 
-- As a company we value clean, concise, thought-out code. 
+#### Notes
+- Check out the sql files in the project -- this is how users get created, and how the initial dataset gets populated. 
+- Note that the database is in-memory right now; upon restart all data will be lost. If you need additional data, feel free to make some up or modify the existing entries.
+- Kotlin is available on the classpath. If you are a fan of Kotlin, you are encouraged to use Kotlin to your heart's content.
+
+#### Tips: 
+- As a company we value clean, concise, working code.
 - Feel free to use online documentation and examples to guide your solution. Try to attribute code properly, and don't violate any licenses. 
-- You are not limited to frameworks and technologies present in the application -- if you want to include additional libraries, go for it!
-- Kotlin is available on the classpath. If you are a fan of Kotlin, you are encouraged to convert / use Kotlin to your heart's content.
-- We love TDD! It is not required to write tests for the new functionality, but very much appreciated.
-- Check out the sql files in the project -- this is how users get created, and how the initial dataset is populated. 
-- Note that the database is in-memory right now, on restart all data will be lost. This is fine for the purposes of this exercise. 
+- You are not limited to frameworks and technologies present in the application -- if you want to include additional libraries that make your job easier, go for it!
+- We love TDD! It is not required to write tests for the new functionality, but very much appreciated and encouraged.
+- Remember to keep it simple. Look at the existing functionality of the app, and try to implement the stories reasonably without re-inventing the wheel.
