@@ -28,7 +28,7 @@ As a task list administrator, I do not want all users to be able to see all task
 **Story 3**
 
 As a task list user, I want to be able to search for a task by its title.
- - [ ] An endpoint should exist that allows me to search for tasks by their title (something like /task/search)
+ - [ ] An endpoint should exist that allows me to search for tasks by their title (something like /tasks/search)
  - [ ] I should be able to supply search criteria to the endpoint, such as a complete title or an individual word
  - [ ] Search should be case-insensitive (e.g. if the title is "Mow the Lawn", I should be able to find it with the keyword "MOW")
  - [ ] The task endpoint should only return tasks for the authenticated user, you should not be able to search for other people's tasks.
