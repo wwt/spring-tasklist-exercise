@@ -22,7 +22,7 @@ class JdbcUserDetailsServiceTest {
         AuthenticatedUser bob = jdbcUserDetailsService.loadUserByUsername(username);
 
         assertThat(bob.getAuthorities()).hasSize(1);
-        assertThat(bob.getAuthorities().get(0).getAuthority()).isEqualTo("USER");
+        assertThat(bob.getAuthorities().get(0).getAuthority()).isEqualTo("ROLE_USER");
     }
 
     @Test
