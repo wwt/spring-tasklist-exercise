@@ -81,7 +81,8 @@ class TaskControllerTest {
     @Test
     @WithUserDetails("bob") // see sql files for user definitions
     void shouldBeAbleToCreateTaskAsAuthenticatedUser() throws Exception {
-        LocalDateTime now = LocalDateTime.now();
+        // Note: nanosecond serialization disabled for times, see: application.properties
+        LocalDateTime now = LocalDateTime.of(2021, 3, 14, 10, 14, 0, 50);
         NewTaskRequest todo = new NewTaskRequest("Work work!", "I need to do this task too!", now);
 
         mockMvc.perform(post("/tasks")
@@ -95,6 +96,6 @@ class TaskControllerTest {
             .andExpect(jsonPath("$").isArray())
             .andExpect(jsonPath("$[1].title").value("Work work!"))
             .andExpect(jsonPath("$[1].description").value("I need to do this task too!"))
-            .andExpect(jsonPath("$[1].due").value(now.toString()));
+            .andExpect(jsonPath("$[1].due").value("2021-03-14T10:14:00"));
     }
 }

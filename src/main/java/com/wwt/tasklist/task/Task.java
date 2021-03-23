@@ -36,14 +36,6 @@ public class Task {
     public Task() {
     }
 
-    public Task(UUID id, @NotEmpty String title, @NotEmpty String description, AuthenticatedUser user, LocalDateTime due) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.user = user;
-        this.due = due;
-    }
-
     public UUID getId() {
         return id;
     }
