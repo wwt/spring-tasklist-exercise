@@ -10,7 +10,12 @@ plugins {
 
 group = "com.wwt"
 version = "1.0.0-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(15))
+    }
+}
 
 repositories {
     mavenCentral()

@@ -32,29 +32,31 @@ class TaskControllerTest {
     void shouldReturnAllTasksWhenNotAuthenticated() throws Exception {
         mockMvc.perform(get("/tasks"))
             .andExpect(status().isOk())
-            .andExpect(content().json("[\n" +
-                "  {\n" +
-                "    \"id\": \"aa0e9504-22fd-41d4-b829-c6d47c837961\",\n" +
-                "    \"title\": \"Test 1\",\n" +
-                "    \"description\": \"I should complete this task 1\",\n" +
-                "    \"due\": null,\n" +
-                "    \"user\": \"bob\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"id\": \"31e37df2-ebf4-4e7b-bb8f-4c6dd6ca7f39\",\n" +
-                "    \"title\": \"Test 2\",\n" +
-                "    \"description\": \"I should complete this task 2\",\n" +
-                "    \"due\": null,\n" +
-                "    \"user\": \"steve\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"id\": \"e2f82fce-8e0b-4333-bd97-2c7f136128b5\",\n" +
-                "    \"title\": \"Test 3\",\n" +
-                "    \"description\": \"I should complete this task 3\",\n" +
-                "    \"due\": null,\n" +
-                "    \"user\": \"nate\"\n" +
-                "  }\n" +
-                "]"))
+            .andExpect(content().json("""
+                    [
+                      {
+                        "id": "aa0e9504-22fd-41d4-b829-c6d47c837961",
+                        "title": "Test 1",
+                        "description": "I should complete this task 1",
+                        "due": null,
+                        "user": "bob"
+                      },
+                      {
+                        "id": "31e37df2-ebf4-4e7b-bb8f-4c6dd6ca7f39",
+                        "title": "Test 2",
+                        "description": "I should complete this task 2",
+                        "due": null,
+                        "user": "steve"
+                      },
+                      {
+                        "id": "e2f82fce-8e0b-4333-bd97-2c7f136128b5",
+                        "title": "Test 3",
+                        "description": "I should complete this task 3",
+                        "due": null,
+                        "user": "nate"
+                      }
+                    ]
+                    """))
             .andExpect(content().string(not(contains("password"))));
     }
 
@@ -63,15 +65,17 @@ class TaskControllerTest {
     void shouldBeAbleToGetTasksForSpecificUser() throws Exception {
         mockMvc.perform(get("/tasks/personal"))
             .andExpect(status().isOk())
-            .andExpect(content().json("[\n" +
-                "  {\n" +
-                "    \"id\": \"e2f82fce-8e0b-4333-bd97-2c7f136128b5\",\n" +
-                "    \"title\": \"Test 3\",\n" +
-                "    \"description\": \"I should complete this task 3\",\n" +
-                "    \"due\": null,\n" +
-                "    \"user\": \"nate\"\n" +
-                "  }\n" +
-                "]"));
+            .andExpect(content().json("""
+                [
+                  {
+                    "id": "e2f82fce-8e0b-4333-bd97-2c7f136128b5",
+                    "title": "Test 3",
+                    "description": "I should complete this task 3",
+                    "due": null,
+                    "user": "nate"
+                  }
+                ]
+            """));
     }
 
     @Test
